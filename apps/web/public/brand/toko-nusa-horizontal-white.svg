@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 120" width="540" height="120" fill="none">
+  <defs>
+    <linearGradient id="hGradWhite" x1="20" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#03AC0E" />
+      <stop offset="100%" stop-color="#00820A" />
+    </linearGradient>
+  </defs>
+  <!-- Symbol Mini -->
+  <g transform="translate(10, 10) scale(0.39)">
+    <path d="M84 100 V74 C84 48 104 28 128 28 C152 28 172 48 172 74 V100" stroke="#03AC0E" stroke-width="18" stroke-linecap="round" />
+    <rect x="36" y="92" width="184" height="136" rx="28" fill="url(#hGradWhite)" />
+    <path d="M76 196 V124 C76 118 82 114 88 118 L168 194 C174 198 180 194 180 188 V124" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="178" cy="118" r="10" fill="#FACC15" />
+  </g>
+  <!-- Wordmark 'TokoNusa' in crisp White for Dark Backgrounds -->
+  <text x="125" y="76" font-family="system-ui, -apple-system, 'Plus Jakarta Sans', sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="-1">Toko<tspan fill="#03AC0E">Nusa</tspan></text>
+  <!-- Official Store Badge -->
+  <rect x="345" y="44" width="76" height="24" rx="6" fill="#064E3B" stroke="#03AC0E" stroke-width="1.5" />
+  <text x="353" y="61" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#4ADE80">OFFICIAL</text>
+  <!-- Tagline in Bright Slate White -->
+  <text x="127" y="98" font-family="system-ui, sans-serif" font-size="14" font-weight="500" fill="#E2E8F0">Belanja Nyaman Se-Nusantara</text>
+</svg>

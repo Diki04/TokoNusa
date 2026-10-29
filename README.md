@@ -1,6 +1,10 @@
 <div align="center">
 
-  <img src="apps/web/public/brand/toko-nusa-horizontal.svg" alt="TokoNusa Logo" width="380" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="apps/web/public/brand/toko-nusa-horizontal-white.svg">
+    <source media="(prefers-color-scheme: light)" srcset="apps/web/public/brand/toko-nusa-horizontal.svg">
+    <img src="apps/web/public/brand/toko-nusa-horizontal-white.svg" alt="TokoNusa Logo" width="380" />
+  </picture>
 
   <p><strong>Platform E-Commerce Modern Berbasis Clean Architecture, SOLID Principles, & Autonomous Microservices</strong></p>
   <p><em>"Belanja Nyaman Se-Nusantara"</em></p>
