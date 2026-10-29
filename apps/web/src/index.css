@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  body {
+    background-color: #F8FAFC;
+    color: #0F172A;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Custom Tokopedia-style scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F1F5F9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+  }
+}
+
+@layer components {
+  /* TokoNusa Button Presets */
+  .btn-tokonusa-primary {
+    @apply inline-flex items-center justify-center font-semibold text-white bg-[#03AC0E] hover:bg-[#00820A] active:scale-[0.98] transition-all duration-150 rounded-lg px-4 py-2.5 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-[#03AC0E];
+  }
+
+  .btn-tokonusa-outline {
+    @apply inline-flex items-center justify-center font-semibold text-[#03AC0E] bg-white border border-[#03AC0E] hover:bg-[#F0FDF4] active:scale-[0.98] transition-all duration-150 rounded-lg px-4 py-2.5 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-tokonusa-secondary {
+    @apply inline-flex items-center justify-center font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 active:scale-[0.98] transition-all duration-150 rounded-lg px-4 py-2.5;
+  }
+
+  /* TokoNusa Badge Presets */
+  .badge-official {
+    @apply inline-flex items-center gap-1 px-1.5 py-0.5 text-[11px] font-bold text-[#03AC0E] bg-[#F0FDF4] border border-[#03AC0E]/30 rounded;
+  }
+
+  .badge-bebas-ongkir {
+    @apply inline-flex items-center gap-1 px-1.5 py-0.5 text-[11px] font-extrabold text-white bg-gradient-to-r from-emerald-500 to-teal-500 rounded shadow-xs;
+  }
+
+  .badge-discount {
+    @apply inline-flex items-center px-1.5 py-0.5 text-[11px] font-bold text-[#E11D48] bg-rose-50 rounded;
+  }
+}
+
+/* Sub-pixel animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
