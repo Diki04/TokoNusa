@@ -91,12 +91,48 @@ export default function Navbar({
   ];
 
   const categories = [
-    { name: 'Fashion & Busana Pria', icon: '👔', slug: 'fashion-pria' },
-    { name: 'Fashion & Busana Wanita', icon: '👗', slug: 'fashion-wanita' },
-    { name: 'Elektronik & Gadget', icon: '📱', slug: 'elektronik-gadget' },
-    { name: 'Makanan & Minuman Khas', icon: '☕', slug: 'makanan-minuman' },
-    { name: 'Kriya & Kerajinan Nusantara', icon: '🏺', slug: 'kriya-nusantara' },
-    { name: 'Kecantikan & Perawatan', icon: '✨', slug: 'kecantikan' },
+    {
+      id: 'cat-gadget',
+      name: 'Gadget & Smartphone',
+      slug: 'gadget-smartphone',
+      imageUrl: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=120&q=80',
+      sample: 'Apple iPhone 16 Pro, Samsung S24',
+    },
+    {
+      id: 'cat-elektronik',
+      name: 'Elektronik & Audio',
+      slug: 'elektronik',
+      imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=120&q=80',
+      sample: 'Sony WH-1000XM5 Hi-Res Audio',
+    },
+    {
+      id: 'cat-fashion-pria',
+      name: 'Fashion Pria & Batik',
+      slug: 'fashion-pria',
+      imageUrl: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=120&q=80',
+      sample: 'Batik Keris Solo, Sneakers Ventela',
+    },
+    {
+      id: 'cat-kuliner',
+      name: 'Kuliner Nusantara',
+      slug: 'makanan-minuman',
+      imageUrl: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=120&q=80',
+      sample: 'Kopi Arabika Gayo, Indomie Spesial',
+    },
+    {
+      id: 'cat-otomotif',
+      name: 'Otomotif & Helm',
+      slug: 'otomotif',
+      imageUrl: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=120&q=80',
+      sample: 'Helm NJS Kairoz Solid Half Face',
+    },
+    {
+      id: 'cat-rumah-tangga',
+      name: 'Hobi & Rumah Tangga',
+      slug: 'hobi-rumah-tangga',
+      imageUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=120&q=80',
+      sample: 'Minyak Kayu Putih Cap Lang 210ml',
+    },
   ];
 
   return (
@@ -178,21 +214,36 @@ export default function Navbar({
 
             {/* Dropdown Menu */}
             {isCategoryOpen && (
-              <div className="absolute left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 animate-slide-up">
-                <div className="px-3 py-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider">
-                  Kategori Pilihan
+              <div className="absolute left-0 mt-2 w-72 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2.5 z-50 animate-slide-up">
+                <div className="px-3.5 py-1.5 text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center justify-between">
+                  <span>Kategori Pilihan</span>
+                  <span className="text-[10px] text-[#03AC0E] font-medium">Sesuai Produk</span>
                 </div>
                 {categories.map((cat) => (
                   <button
-                    key={cat.slug}
+                    key={cat.id || cat.slug}
                     onClick={() => {
                       setIsCategoryOpen(false);
-                      navigateTo('home', { category: cat.slug });
+                      navigateTo('home', { category: cat.id });
                     }}
-                    className="w-full px-3 py-2 text-left text-sm text-slate-700 hover:bg-[#F0FDF4] hover:text-[#03AC0E] flex items-center gap-3 transition-colors"
+                    className="w-full px-3.5 py-2 text-left hover:bg-[#F0FDF4] group flex items-center gap-3 transition-colors cursor-pointer"
                   >
-                    <span className="text-lg">{cat.icon}</span>
-                    <span className="font-medium">{cat.name}</span>
+                    <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0 border border-slate-200/80 bg-slate-50 group-hover:border-[#03AC0E]/50 transition-colors">
+                      <img
+                        src={cat.imageUrl}
+                        alt={cat.name}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs font-semibold text-slate-800 group-hover:text-[#03AC0E] truncate transition-colors">
+                        {cat.name}
+                      </div>
+                      <div className="text-[11px] text-slate-400 truncate">
+                        {cat.sample}
+                      </div>
+                    </div>
                   </button>
                 ))}
               </div>

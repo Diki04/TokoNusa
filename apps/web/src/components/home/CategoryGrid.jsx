@@ -7,9 +7,6 @@ import {
   Car,
   Home,
   LayoutGrid,
-  Laptop,
-  Watch,
-  Heart,
   Package,
 } from 'lucide-react';
 
@@ -21,19 +18,17 @@ const ICON_MAP = {
   Car,
   Home,
   LayoutGrid,
-  Laptop,
-  Watch,
-  Heart,
   Package,
 };
 
-const DEFAULT_CATEGORIES = [
+export const DEFAULT_CATEGORIES = [
   {
     id: 'all',
     name: 'Semua Kategori',
     slug: 'all',
     icon: 'LayoutGrid',
     color: 'bg-emerald-50 text-[#03AC0E]',
+    image_url: null,
   },
   {
     id: 'cat-gadget',
@@ -41,6 +36,7 @@ const DEFAULT_CATEGORIES = [
     slug: 'gadget-smartphone',
     icon: 'Smartphone',
     color: 'bg-blue-50 text-blue-600',
+    image_url: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=300&q=80',
   },
   {
     id: 'cat-elektronik',
@@ -48,6 +44,7 @@ const DEFAULT_CATEGORIES = [
     slug: 'elektronik',
     icon: 'Tv',
     color: 'bg-indigo-50 text-indigo-600',
+    image_url: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80',
   },
   {
     id: 'cat-fashion-pria',
@@ -55,6 +52,7 @@ const DEFAULT_CATEGORIES = [
     slug: 'fashion-pria',
     icon: 'Shirt',
     color: 'bg-amber-50 text-amber-700',
+    image_url: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=300&q=80',
   },
   {
     id: 'cat-kuliner',
@@ -62,13 +60,15 @@ const DEFAULT_CATEGORIES = [
     slug: 'makanan-minuman',
     icon: 'Coffee',
     color: 'bg-orange-50 text-orange-600',
+    image_url: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=300&q=80',
   },
   {
     id: 'cat-otomotif',
-    name: 'Otomotif',
+    name: 'Otomotif & Helm',
     slug: 'otomotif',
     icon: 'Car',
     color: 'bg-rose-50 text-rose-600',
+    image_url: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=300&q=80',
   },
   {
     id: 'cat-rumah-tangga',
@@ -76,6 +76,7 @@ const DEFAULT_CATEGORIES = [
     slug: 'hobi-rumah-tangga',
     icon: 'Home',
     color: 'bg-teal-50 text-teal-700',
+    image_url: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=300&q=80',
   },
 ];
 
@@ -84,7 +85,7 @@ export default function CategoryGrid({
   selectedCategory = 'all',
   onSelectCategory,
 }) {
-  // Ensure "Semua" is available if not in list
+  // Merge or ensure "Semua Kategori" is available
   const displayList = categories.some((c) => c.id === 'all')
     ? categories
     : [
@@ -94,6 +95,7 @@ export default function CategoryGrid({
           slug: 'all',
           icon: 'LayoutGrid',
           color: 'bg-emerald-50 text-[#03AC0E]',
+          image_url: null,
         },
         ...categories,
       ];
@@ -106,7 +108,7 @@ export default function CategoryGrid({
             Kategori Pilihan
           </h2>
           <p className="text-xs sm:text-sm text-slate-500">
-            Temukan produk incaran dari seluruh kategori terlengkap
+            Temukan produk incaran dari seluruh kategori terlengkap sesuai katalog
           </p>
         </div>
       </div>
@@ -121,18 +123,29 @@ export default function CategoryGrid({
               key={cat.id}
               type="button"
               onClick={() => onSelectCategory && onSelectCategory(cat.id === 'all' ? '' : cat.id)}
-              className={`flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-xl border transition-all duration-200 text-center group cursor-pointer ${
+              className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border transition-all duration-200 text-center group cursor-pointer ${
                 isSelected
-                  ? 'border-[#03AC0E] bg-emerald-50/50 shadow-sm ring-2 ring-emerald-500/20'
-                  : 'border-slate-200 bg-white hover:border-emerald-300 hover:shadow-xs'
+                  ? 'border-[#03AC0E] bg-emerald-50/60 shadow-sm ring-2 ring-emerald-500/20'
+                  : 'border-slate-200 bg-white hover:border-emerald-300 hover:shadow-sm'
               }`}
             >
-              <div
-                className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-2.5 transition-transform duration-200 group-hover:scale-110 ${
-                  cat.color || 'bg-slate-100 text-slate-600'
-                }`}
-              >
-                <IconComponent className="w-5 h-5 sm:w-6 sm:h-6" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden mb-2.5 flex items-center justify-center bg-slate-50 border border-slate-100 group-hover:scale-105 group-hover:border-emerald-200 transition-all duration-200 relative shrink-0">
+                {cat.image_url ? (
+                  <img
+                    src={cat.image_url}
+                    alt={cat.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div
+                    className={`w-full h-full flex items-center justify-center ${
+                      cat.color || 'bg-emerald-50 text-[#03AC0E]'
+                    }`}
+                  >
+                    <IconComponent className="w-6 h-6" />
+                  </div>
+                )}
               </div>
               <span
                 className={`text-xs sm:text-sm font-semibold line-clamp-1 ${

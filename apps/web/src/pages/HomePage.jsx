@@ -17,12 +17,48 @@ import {
 } from 'lucide-react';
 
 const FALLBACK_CATEGORIES = [
-  { id: 'cat-gadget', name: 'Gadget & HP', slug: 'gadget-smartphone', icon: 'Smartphone' },
-  { id: 'cat-elektronik', name: 'Elektronik & Audio', slug: 'elektronik', icon: 'Tv' },
-  { id: 'cat-fashion-pria', name: 'Fashion Pria', slug: 'fashion-pria', icon: 'Shirt' },
-  { id: 'cat-kuliner', name: 'Kuliner Nusantara', slug: 'makanan-minuman', icon: 'Coffee' },
-  { id: 'cat-otomotif', name: 'Otomotif', slug: 'otomotif', icon: 'Car' },
-  { id: 'cat-rumah-tangga', name: 'Hobi & Rumah', slug: 'hobi-rumah-tangga', icon: 'Home' },
+  {
+    id: 'cat-gadget',
+    name: 'Gadget & HP',
+    slug: 'gadget-smartphone',
+    icon: 'Smartphone',
+    image_url: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=300&q=80',
+  },
+  {
+    id: 'cat-elektronik',
+    name: 'Elektronik & Audio',
+    slug: 'elektronik',
+    icon: 'Tv',
+    image_url: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80',
+  },
+  {
+    id: 'cat-fashion-pria',
+    name: 'Fashion Pria',
+    slug: 'fashion-pria',
+    icon: 'Shirt',
+    image_url: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=300&q=80',
+  },
+  {
+    id: 'cat-kuliner',
+    name: 'Kuliner Nusantara',
+    slug: 'makanan-minuman',
+    icon: 'Coffee',
+    image_url: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=300&q=80',
+  },
+  {
+    id: 'cat-otomotif',
+    name: 'Otomotif & Helm',
+    slug: 'otomotif',
+    icon: 'Car',
+    image_url: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=300&q=80',
+  },
+  {
+    id: 'cat-rumah-tangga',
+    name: 'Hobi & Rumah',
+    slug: 'hobi-rumah-tangga',
+    icon: 'Home',
+    image_url: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=300&q=80',
+  },
 ];
 
 const FALLBACK_PRODUCTS = [
