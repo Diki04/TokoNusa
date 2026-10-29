@@ -10,6 +10,7 @@ import CartPage from './pages/CartPage.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import OrderHistoryPage from './pages/OrderHistoryPage.jsx';
 import SellerDashboardPage from './pages/SellerDashboardPage.jsx';
+import AdminDashboardPage from './pages/AdminDashboardPage.jsx';
 import { ArrowLeft } from 'lucide-react';
 
 function AppContent() {
@@ -109,12 +110,17 @@ function AppContent() {
           <SellerDashboardPage onNavigate={handleNavigate} />
         )}
 
+        {currentPage === 'admin-dashboard' && (
+          <AdminDashboardPage onNavigate={handleNavigate} />
+        )}
+
         {currentPage !== 'home' &&
           currentPage !== 'product-detail' &&
           currentPage !== 'cart' &&
           currentPage !== 'checkout' &&
           currentPage !== 'orders' &&
-          currentPage !== 'seller-center' && (
+          currentPage !== 'seller-center' &&
+          currentPage !== 'admin-dashboard' && (
             <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 text-center max-w-xl mx-auto shadow-xs">
               <h2 className="text-lg font-bold text-slate-800 mb-2 capitalize">
                 Halaman {currentPage}

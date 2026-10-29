@@ -80,16 +80,12 @@ export function createCatalogDatabase(dbPath = 'catalog.db') {
 }
 
 export function seedCatalogData(db) {
-  // Check if categories are already seeded
-  const existingCount = db.prepare('SELECT COUNT(*) as count FROM categories').get();
-  if (existingCount && existingCount.count > 0) {
-    return;
-  }
+  // Update or insert category metadata
 
   db.exec('BEGIN TRANSACTION');
   try {
     const insertCatStmt = db.prepare(`
-      INSERT INTO categories (id, name, slug, icon, image_url)
+      INSERT OR REPLACE INTO categories (id, name, slug, icon, image_url)
       VALUES (?, ?, ?, ?, ?)
     `);
 

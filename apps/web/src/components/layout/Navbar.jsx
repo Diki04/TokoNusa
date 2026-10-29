@@ -9,6 +9,7 @@ import {
   ChevronDown,
   Store,
   HelpCircle,
+  ShieldCheck,
   Smartphone,
   LogOut,
   ShoppingBag,
@@ -146,13 +147,23 @@ export default function Navbar({
               Download TokoNusa App
             </span>
             <span className="text-slate-300">|</span>
-            <span
-              onClick={() => navigateTo('seller-center')}
-              className="flex items-center gap-1.5 hover:text-[#03AC0E] cursor-pointer font-medium transition-colors"
-            >
-              <Store className="w-3.5 h-3.5 text-[#03AC0E]" />
-              Mulai Berjualan di TokoNusa
-            </span>
+            {user?.role === 'ADMIN' ? (
+              <span
+                onClick={() => navigateTo('admin-dashboard')}
+                className="flex items-center gap-1.5 text-purple-700 hover:text-purple-800 cursor-pointer font-bold transition-colors"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-purple-600" />
+                Admin Console
+              </span>
+            ) : (
+              <span
+                onClick={() => navigateTo('seller-center')}
+                className="flex items-center gap-1.5 hover:text-[#03AC0E] cursor-pointer font-medium transition-colors"
+              >
+                <Store className="w-3.5 h-3.5 text-[#03AC0E]" />
+                Mulai Berjualan di TokoNusa
+              </span>
+            )}
             <span className="text-slate-300">|</span>
             <span className="hover:text-[#03AC0E] cursor-pointer transition-colors">
               Mitra TokoNusa
@@ -337,10 +348,32 @@ export default function Navbar({
                       <p className="text-xs text-slate-400 font-medium">Masuk sebagai</p>
                       <p className="text-sm font-bold text-slate-800 truncate">{user?.name}</p>
                       <p className="text-xs text-slate-500 truncate">{user?.email}</p>
-                      <span className="inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-[#03AC0E]">
-                        {user?.role === 'SELLER' ? 'Pedagang Official' : 'Pembeli Nusantara'}
+                      <span
+                        className={`inline-block mt-1 text-[10px] font-bold px-2 py-0.5 rounded ${
+                          user?.role === 'ADMIN'
+                            ? 'bg-purple-50 text-purple-700 border border-purple-200'
+                            : user?.role === 'SELLER'
+                            ? 'bg-emerald-50 text-[#03AC0E]'
+                            : 'bg-blue-50 text-blue-700'
+                        }`}
+                      >
+                        {user?.role === 'ADMIN'
+                          ? 'Administrator TokoNusa'
+                          : user?.role === 'SELLER'
+                          ? 'Pedagang Official'
+                          : 'Pembeli Nusantara'}
                       </span>
                     </div>
+
+                    {user?.role === 'ADMIN' && (
+                      <button
+                        onClick={() => navigateTo('admin-dashboard')}
+                        className="w-full px-4 py-2 text-left text-xs font-semibold text-purple-700 hover:bg-purple-50 flex items-center gap-2.5 transition-colors"
+                      >
+                        <ShieldCheck className="w-4 h-4 text-purple-600" />
+                        Admin Console
+                      </button>
+                    )}
 
                     <button
                       onClick={() => navigateTo('orders')}
@@ -350,13 +383,15 @@ export default function Navbar({
                       Pesanan Saya
                     </button>
 
-                    <button
-                      onClick={() => navigateTo('seller-center')}
-                      className="w-full px-4 py-2 text-left text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-2.5 transition-colors"
-                    >
-                      <Store className="w-4 h-4 text-[#03AC0E]" />
-                      Seller Center
-                    </button>
+                    {(user?.role === 'SELLER' || user?.role === 'ADMIN') && (
+                      <button
+                        onClick={() => navigateTo('seller-center')}
+                        className="w-full px-4 py-2 text-left text-xs font-semibold text-slate-700 hover:bg-slate-50 flex items-center gap-2.5 transition-colors"
+                      >
+                        <Store className="w-4 h-4 text-[#03AC0E]" />
+                        Seller & Catalog Center
+                      </button>
+                    )}
 
                     <div className="my-1 border-t border-slate-100"></div>
 

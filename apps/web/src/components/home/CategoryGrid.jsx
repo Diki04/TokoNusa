@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Smartphone,
   Tv,
@@ -80,6 +80,51 @@ export const DEFAULT_CATEGORIES = [
   },
 ];
 
+function CategoryCard({ cat, isSelected, onSelectCategory }) {
+  const [imageError, setImageError] = useState(false);
+  const IconComponent = ICON_MAP[cat.icon] || Package;
+  const showImage = Boolean(cat.image_url) && !imageError;
+
+  return (
+    <button
+      type="button"
+      onClick={() => onSelectCategory && onSelectCategory(cat.id === 'all' ? '' : cat.id)}
+      className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border transition-all duration-200 text-center group cursor-pointer ${
+        isSelected
+          ? 'border-[#03AC0E] bg-emerald-50/60 shadow-sm ring-2 ring-emerald-500/20'
+          : 'border-slate-200 bg-white hover:border-emerald-300 hover:shadow-sm'
+      }`}
+    >
+      <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden mb-2.5 flex items-center justify-center bg-slate-50 border border-slate-100 group-hover:scale-105 group-hover:border-emerald-200 transition-all duration-200 relative shrink-0">
+        {showImage ? (
+          <img
+            src={cat.image_url}
+            alt=""
+            onError={() => setImageError(true)}
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            loading="lazy"
+          />
+        ) : (
+          <div
+            className={`w-full h-full flex items-center justify-center ${
+              cat.color || 'bg-emerald-50 text-[#03AC0E]'
+            }`}
+          >
+            <IconComponent className="w-6 h-6" />
+          </div>
+        )}
+      </div>
+      <span
+        className={`text-xs sm:text-sm font-semibold line-clamp-1 ${
+          isSelected ? 'text-[#03AC0E]' : 'text-slate-700 group-hover:text-[#03AC0E]'
+        }`}
+      >
+        {cat.name}
+      </span>
+    </button>
+  );
+}
+
 export default function CategoryGrid({
   categories = DEFAULT_CATEGORIES,
   selectedCategory = 'all',
@@ -116,45 +161,13 @@ export default function CategoryGrid({
       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 sm:gap-4">
         {displayList.map((cat) => {
           const isSelected = selectedCategory === cat.id || selectedCategory === cat.slug;
-          const IconComponent = ICON_MAP[cat.icon] || Package;
-
           return (
-            <button
+            <CategoryCard
               key={cat.id}
-              type="button"
-              onClick={() => onSelectCategory && onSelectCategory(cat.id === 'all' ? '' : cat.id)}
-              className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border transition-all duration-200 text-center group cursor-pointer ${
-                isSelected
-                  ? 'border-[#03AC0E] bg-emerald-50/60 shadow-sm ring-2 ring-emerald-500/20'
-                  : 'border-slate-200 bg-white hover:border-emerald-300 hover:shadow-sm'
-              }`}
-            >
-              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden mb-2.5 flex items-center justify-center bg-slate-50 border border-slate-100 group-hover:scale-105 group-hover:border-emerald-200 transition-all duration-200 relative shrink-0">
-                {cat.image_url ? (
-                  <img
-                    src={cat.image_url}
-                    alt={cat.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div
-                    className={`w-full h-full flex items-center justify-center ${
-                      cat.color || 'bg-emerald-50 text-[#03AC0E]'
-                    }`}
-                  >
-                    <IconComponent className="w-6 h-6" />
-                  </div>
-                )}
-              </div>
-              <span
-                className={`text-xs sm:text-sm font-semibold line-clamp-1 ${
-                  isSelected ? 'text-[#03AC0E]' : 'text-slate-700 group-hover:text-[#03AC0E]'
-                }`}
-              >
-                {cat.name}
-              </span>
-            </button>
+              cat={cat}
+              isSelected={isSelected}
+              onSelectCategory={onSelectCategory}
+            />
           );
         })}
       </div>
