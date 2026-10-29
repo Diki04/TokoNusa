@@ -96,17 +96,25 @@ export class SqliteCatalogRepository extends ICatalogRepository {
 
     const rows = this.db.prepare(selectSql).all(...params, limitNum, offset);
 
-    const products = rows.map((row) => ({
-      ...row,
-      originalPrice: row.original_price,
-      discountPercent: row.discount_percent,
-      categoryId: row.category_id,
-      merchantId: row.merchant_id,
-      merchantName: row.merchant_name,
-      merchantBadge: row.merchant_badge,
-      soldCount: row.sold_count,
-      createdAt: row.created_at,
-    }));
+    const products = rows.map((row) => {
+      const img = row.primary_image || '';
+      return {
+        ...row,
+        imageUrl: img,
+        image_url: img,
+        primaryImage: img,
+        primary_image: img,
+        images: img ? [{ id: `img-${row.id}-1`, image_url: img, imageUrl: img, is_primary: 1 }] : [],
+        originalPrice: row.original_price,
+        discountPercent: row.discount_percent,
+        categoryId: row.category_id,
+        merchantId: row.merchant_id,
+        merchantName: row.merchant_name,
+        merchantBadge: row.merchant_badge,
+        soldCount: row.sold_count,
+        createdAt: row.created_at,
+      };
+    });
 
     return {
       products,

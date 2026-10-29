@@ -20,6 +20,10 @@ export default function ProductCard({ product, onClick, onAddToCart }) {
   } = product;
 
   const displayImage =
+    product.primary_image ||
+    product.primaryImage ||
+    product.imageUrl ||
+    product.image_url ||
     imageUrl ||
     images?.[0]?.image_url ||
     images?.[0]?.imageUrl ||

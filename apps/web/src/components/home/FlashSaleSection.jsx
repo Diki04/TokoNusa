@@ -198,9 +198,13 @@ export default function FlashSaleSection({
           const percentageClaimed = calculateStockPercentage(item.sold_count || 0, totalStock);
 
           const imageSrc =
+            item.primary_image ||
+            item.primaryImage ||
             item.imageUrl ||
+            item.image_url ||
             item.images?.[0]?.image_url ||
             item.images?.[0]?.imageUrl ||
+            (typeof item.images?.[0] === 'string' ? item.images[0] : '') ||
             'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80';
 
           return (
