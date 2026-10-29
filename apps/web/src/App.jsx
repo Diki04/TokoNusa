@@ -4,6 +4,7 @@ import { CartProvider, useCart } from './context/CartContext.jsx';
 import Navbar from './components/layout/Navbar.jsx';
 import Footer from './components/layout/Footer.jsx';
 import MobileBottomNav from './components/layout/MobileBottomNav.jsx';
+import AuthModal from './components/auth/AuthModal.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ProductDetailPage from './pages/ProductDetailPage.jsx';
 import CartPage from './pages/CartPage.jsx';
@@ -22,13 +23,36 @@ function AppContent() {
   const [checkoutItems, setCheckoutItems] = useState([]);
   const [orderTrackingId, setOrderTrackingId] = useState(null);
 
+  // Auth Modal State
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState('login');
+
   const { user, isAuthenticated } = useAuth();
   const { itemCount } = useCart();
 
+  const handleOpenAuthModal = (mode = 'login') => {
+    setAuthModalMode(mode);
+    setIsAuthModalOpen(true);
+  };
+
   const handleNavigate = (page, params = {}) => {
+    // Intercept login/register navigation to open modal directly
+    if (page === 'login') {
+      handleOpenAuthModal('login');
+      return;
+    }
+    if (page === 'register') {
+      handleOpenAuthModal('register');
+      return;
+    }
+
     // Handle mobile nav redirects
     if (page === 'account') {
-      page = 'orders';
+      if (!isAuthenticated) {
+        handleOpenAuthModal('login');
+        return;
+      }
+      page = user?.role === 'ADMIN' ? 'admin-dashboard' : 'orders';
     } else if (page === 'categories') {
       page = 'home';
     }
@@ -69,6 +93,7 @@ function AppContent() {
           handleNavigate('home', { search: term });
         }}
         onNavigate={handleNavigate}
+        onOpenAuthModal={handleOpenAuthModal}
       />
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 pb-24 lg:pb-8">
@@ -145,6 +170,14 @@ function AppContent() {
       <MobileBottomNav
         activeTab={currentPage}
         onSelectTab={handleNavigate}
+      />
+
+      {/* Global Auth Modal for Seamless Login & Registration */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        initialMode={authModalMode}
+        onClose={() => setIsAuthModalOpen(false)}
+        onNavigate={handleNavigate}
       />
     </div>
   );

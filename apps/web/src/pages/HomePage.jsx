@@ -22,6 +22,7 @@ const FALLBACK_CATEGORIES = [
     name: 'Gadget & HP',
     slug: 'gadget-smartphone',
     icon: 'Smartphone',
+    imageUrl: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=300&q=80',
     image_url: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=300&q=80',
   },
   {
@@ -29,6 +30,7 @@ const FALLBACK_CATEGORIES = [
     name: 'Elektronik & Audio',
     slug: 'elektronik',
     icon: 'Tv',
+    imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80',
     image_url: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80',
   },
   {
@@ -36,6 +38,7 @@ const FALLBACK_CATEGORIES = [
     name: 'Fashion Pria',
     slug: 'fashion-pria',
     icon: 'Shirt',
+    imageUrl: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=300&q=80',
     image_url: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=300&q=80',
   },
   {
@@ -43,6 +46,7 @@ const FALLBACK_CATEGORIES = [
     name: 'Kuliner Nusantara',
     slug: 'makanan-minuman',
     icon: 'Coffee',
+    imageUrl: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=300&q=80',
     image_url: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=300&q=80',
   },
   {
@@ -50,6 +54,7 @@ const FALLBACK_CATEGORIES = [
     name: 'Otomotif & Helm',
     slug: 'otomotif',
     icon: 'Car',
+    imageUrl: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=300&q=80',
     image_url: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=300&q=80',
   },
   {
@@ -57,6 +62,7 @@ const FALLBACK_CATEGORIES = [
     name: 'Hobi & Rumah',
     slug: 'hobi-rumah-tangga',
     icon: 'Home',
+    imageUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=300&q=80',
     image_url: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=300&q=80',
   },
 ];
@@ -80,6 +86,8 @@ const FALLBACK_PRODUCTS = [
     city: 'Jakarta Pusat',
     rating: 4.9,
     sold_count: 1420,
+    imageUrl: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80',
+    primary_image: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80',
     images: [
       { id: 'img-ip16-1', image_url: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80', is_primary: 1 },
       { id: 'img-ip16-2', image_url: 'https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=800&q=80', is_primary: 0 },
@@ -112,6 +120,8 @@ const FALLBACK_PRODUCTS = [
     city: 'Aceh Tengah',
     rating: 4.9,
     sold_count: 4850,
+    imageUrl: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80',
+    primary_image: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80',
     images: [
       { id: 'img-gayo-1', image_url: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80', is_primary: 1 },
       { id: 'img-gayo-2', image_url: 'https://images.unsplash.com/photo-1559525839-8f8ec3ed6acb?auto=format&fit=crop&w=800&q=80', is_primary: 0 },
@@ -144,6 +154,8 @@ const FALLBACK_PRODUCTS = [
     city: 'Solo',
     rating: 4.8,
     sold_count: 890,
+    imageUrl: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80',
+    primary_image: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80',
     images: [
       { id: 'img-batik-1', image_url: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80', is_primary: 1 },
     ],
@@ -174,6 +186,8 @@ const FALLBACK_PRODUCTS = [
     city: 'Jakarta Barat',
     rating: 5.0,
     sold_count: 720,
+    imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+    primary_image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
     images: [
       { id: 'img-sony-1', image_url: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80', is_primary: 1 },
     ],
@@ -203,6 +217,8 @@ const FALLBACK_PRODUCTS = [
     city: 'Bandung',
     rating: 4.8,
     sold_count: 3600,
+    imageUrl: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80',
+    primary_image: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80',
     images: [
       { id: 'img-ventela-1', image_url: 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80', is_primary: 1 },
     ],
@@ -233,6 +249,8 @@ const FALLBACK_PRODUCTS = [
     city: 'Jakarta Pusat',
     rating: 4.9,
     sold_count: 980,
+    imageUrl: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80',
+    primary_image: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80',
     images: [
       { id: 'img-s24-1', image_url: 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80', is_primary: 1 },
     ],
@@ -242,6 +260,67 @@ const FALLBACK_PRODUCTS = [
     ],
     reviews: [
       { id: 'rev-s24-1', user_name: 'Irwan Setiawan', rating: 5, comment: 'Fitur Circle to Search dan live translation sangat membantu pekerjaan. Layar anti pantul mantap sekali di bawah sinar matahari.', created_at: '2026-10-19 13:40:00' },
+    ],
+  },
+  {
+    id: 'prod-helm-njs-kairoz',
+    name: 'Helm NJS Kairoz GT Solid Half Face Double Visor Glossy Black',
+    slug: 'helm-njs-kairoz-gt-solid-half-face-double-visor-glossy-black',
+    description:
+      'Helm half face modern bersertifikasi SNI dan DOT. Dilengkapi visor smoke tahan gores, fitur slot intercom, ventilasi aerodinamis, dan pengunci microlock berkualitas tinggi.',
+    price: 680000,
+    original_price: 750000,
+    discount_percent: 9,
+    stock: 80,
+    category_id: 'cat-otomotif',
+    category_name: 'Otomotif & Helm',
+    merchant_id: 'merchant-njs-official',
+    merchant_name: 'NJS Helmet Store',
+    merchant_badge: 'Official Store',
+    city: 'Tangerang',
+    rating: 4.8,
+    sold_count: 3100,
+    imageUrl: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80',
+    primary_image: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80',
+    images: [
+      { id: 'img-helm-1', image_url: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80', is_primary: 1 },
+    ],
+    variants: [
+      { id: 'var-njs-m', name: 'Ukuran M (57-58 cm)', type: 'UKURAN', price_delta: 0, stock: 30 },
+      { id: 'var-njs-l', name: 'Ukuran L (59-60 cm)', type: 'UKURAN', price_delta: 0, stock: 30 },
+    ],
+    reviews: [
+      { id: 'rev-njs-1', user_name: 'Rian Kurniawan', rating: 5, comment: 'Visor jernih banget, fitting pas di kepala tanpa menekan pipi.', created_at: '2026-10-14 08:30:00' },
+    ],
+  },
+  {
+    id: 'prod-minyak-kayu-putih-cap-lang',
+    name: 'Minyak Kayu Putih Cap Lang 210 ml Hangat Alami Original',
+    slug: 'minyak-kayu-putih-cap-lang-210-ml-hangat-alami-original',
+    description:
+      'Minyak Kayu Putih Cap Lang menggunakan minyak kayu putih murni dari daun Melaleuca cajuputi di Maluku. Menghangatkan tubuh keluarga.',
+    price: 52500,
+    original_price: 60000,
+    discount_percent: 13,
+    stock: 400,
+    category_id: 'cat-rumah-tangga',
+    category_name: 'Hobi & Rumah',
+    merchant_id: 'merchant-apotek-sehat',
+    merchant_name: 'Apotek Sehat Nusantara',
+    merchant_badge: 'Official Store',
+    city: 'Semarang',
+    rating: 4.9,
+    sold_count: 18900,
+    imageUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80',
+    primary_image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80',
+    images: [
+      { id: 'img-caplang-1', image_url: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80', is_primary: 1 },
+    ],
+    variants: [
+      { id: 'var-caplang-210', name: 'Kemasan 210 ml', type: 'VOLUME', price_delta: 0, stock: 250 },
+    ],
+    reviews: [
+      { id: 'rev-caplang-1', user_name: 'Tri Wahyuni', rating: 5, comment: 'Produk asli dari apotek, botol aman bubble wrap tebal tanpa tumpah.', created_at: '2026-10-23 18:05:00' },
     ],
   },
 ];
@@ -287,14 +366,36 @@ export default function HomePage({
 
         if (isMounted) {
           if (catsRes.status === 'fulfilled' && Array.isArray(catsRes.value) && catsRes.value.length > 0) {
-            setCategories(catsRes.value);
+            const normalizedCats = catsRes.value.map((c) => ({
+              ...c,
+              imageUrl: c.imageUrl || c.image_url,
+              image_url: c.image_url || c.imageUrl,
+            }));
+            setCategories(normalizedCats);
           }
           if (prodsRes.status === 'fulfilled' && prodsRes.value) {
-            const list = Array.isArray(prodsRes.value)
+            const rawList = Array.isArray(prodsRes.value)
               ? prodsRes.value
               : prodsRes.value.products || [];
-            if (list.length > 0) {
-              setProducts(list);
+            if (rawList.length > 0) {
+              const normalizedProds = rawList.map((p) => {
+                const img =
+                  p.primary_image ||
+                  p.primaryImage ||
+                  p.imageUrl ||
+                  p.image_url ||
+                  p.images?.[0]?.image_url ||
+                  p.images?.[0]?.imageUrl ||
+                  '';
+                return {
+                  ...p,
+                  imageUrl: img,
+                  image_url: img,
+                  primary_image: img,
+                  primaryImage: img,
+                };
+              });
+              setProducts(normalizedProds);
             }
           }
         }

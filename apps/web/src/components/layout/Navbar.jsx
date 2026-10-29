@@ -11,6 +11,11 @@ import {
   HelpCircle,
   ShieldCheck,
   Smartphone,
+  Tv,
+  Shirt,
+  Coffee,
+  Car,
+  Home,
   LogOut,
   ShoppingBag,
   Sparkles,
@@ -96,6 +101,7 @@ export default function Navbar({
       id: 'cat-gadget',
       name: 'Gadget & Smartphone',
       slug: 'gadget-smartphone',
+      icon: Smartphone,
       imageUrl: 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=120&q=80',
       sample: 'Apple iPhone 16 Pro, Samsung S24',
     },
@@ -103,6 +109,7 @@ export default function Navbar({
       id: 'cat-elektronik',
       name: 'Elektronik & Audio',
       slug: 'elektronik',
+      icon: Tv,
       imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=120&q=80',
       sample: 'Sony WH-1000XM5 Hi-Res Audio',
     },
@@ -110,6 +117,7 @@ export default function Navbar({
       id: 'cat-fashion-pria',
       name: 'Fashion Pria & Batik',
       slug: 'fashion-pria',
+      icon: Shirt,
       imageUrl: 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=120&q=80',
       sample: 'Batik Keris Solo, Sneakers Ventela',
     },
@@ -117,6 +125,7 @@ export default function Navbar({
       id: 'cat-kuliner',
       name: 'Kuliner Nusantara',
       slug: 'makanan-minuman',
+      icon: Coffee,
       imageUrl: 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=120&q=80',
       sample: 'Kopi Arabika Gayo, Indomie Spesial',
     },
@@ -124,6 +133,7 @@ export default function Navbar({
       id: 'cat-otomotif',
       name: 'Otomotif & Helm',
       slug: 'otomotif',
+      icon: Car,
       imageUrl: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=120&q=80',
       sample: 'Helm NJS Kairoz Solid Half Face',
     },
@@ -131,6 +141,7 @@ export default function Navbar({
       id: 'cat-rumah-tangga',
       name: 'Hobi & Rumah Tangga',
       slug: 'hobi-rumah-tangga',
+      icon: Home,
       imageUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=120&q=80',
       sample: 'Minyak Kayu Putih Cap Lang 210ml',
     },
@@ -239,13 +250,22 @@ export default function Navbar({
                     }}
                     className="w-full px-3.5 py-2 text-left hover:bg-[#F0FDF4] group flex items-center gap-3 transition-colors cursor-pointer"
                   >
-                    <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0 border border-slate-200/80 bg-slate-50 group-hover:border-[#03AC0E]/50 transition-colors">
-                      <img
-                        src={cat.imageUrl}
-                        alt={cat.name}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200"
-                        loading="lazy"
-                      />
+                    <div className="w-10 h-10 rounded-xl overflow-hidden shrink-0 border border-slate-200/80 bg-slate-50 group-hover:border-[#03AC0E]/50 flex items-center justify-center transition-colors">
+                      {cat.imageUrl ? (
+                        <img
+                          src={cat.imageUrl}
+                          alt=""
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                            if (e.currentTarget.nextSibling) e.currentTarget.nextSibling.style.display = 'flex';
+                          }}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-200"
+                          loading="lazy"
+                        />
+                      ) : null}
+                      <div style={{ display: cat.imageUrl ? 'none' : 'flex' }} className="w-full h-full bg-emerald-50 text-[#03AC0E] items-center justify-center">
+                        {cat.icon && <cat.icon className="w-5 h-5" />}
+                      </div>
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-xs font-semibold text-slate-800 group-hover:text-[#03AC0E] truncate transition-colors">
@@ -508,7 +528,7 @@ export default function Navbar({
                   onClick={() => navigateTo('home', { category: cat.slug })}
                   className="w-full flex items-center gap-3 px-3 py-2 text-sm text-slate-700 hover:bg-[#F0FDF4] hover:text-[#03AC0E] rounded-lg transition-colors"
                 >
-                  <span>{cat.icon}</span>
+                  <span>{cat.icon && <cat.icon className="w-4 h-4 text-[#03AC0E]" />}</span>
                   <span className="font-medium">{cat.name}</span>
                 </button>
               ))}

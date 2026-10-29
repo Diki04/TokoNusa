@@ -80,7 +80,8 @@ export function createCatalogDatabase(dbPath = 'catalog.db') {
 }
 
 export function seedCatalogData(db) {
-  // Update or insert category metadata
+  // Check if products already seeded to prevent unique constraint failures
+  const existingCount = db.prepare('SELECT COUNT(*) as count FROM products').get();
 
   db.exec('BEGIN TRANSACTION');
   try {
@@ -93,63 +94,65 @@ export function seedCatalogData(db) {
       insertCatStmt.run(cat.id, cat.name, cat.slug, cat.icon, cat.image_url);
     }
 
-    const insertProdStmt = db.prepare(`
-      INSERT INTO products (
-        id, name, slug, description, price, original_price, discount_percent,
-        stock, category_id, merchant_id, merchant_name, merchant_badge,
-        city, rating, sold_count
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
+    if (!existingCount || existingCount.count === 0) {
+      const insertProdStmt = db.prepare(`
+        INSERT OR REPLACE INTO products (
+          id, name, slug, description, price, original_price, discount_percent,
+          stock, category_id, merchant_id, merchant_name, merchant_badge,
+          city, rating, sold_count
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
 
-    const insertImgStmt = db.prepare(`
-      INSERT INTO product_images (id, product_id, image_url, is_primary)
-      VALUES (?, ?, ?, ?)
-    `);
+      const insertImgStmt = db.prepare(`
+        INSERT OR REPLACE INTO product_images (id, product_id, image_url, is_primary)
+        VALUES (?, ?, ?, ?)
+      `);
 
-    const insertVarStmt = db.prepare(`
-      INSERT INTO product_variants (id, product_id, name, type, price_delta, stock)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `);
+      const insertVarStmt = db.prepare(`
+        INSERT OR REPLACE INTO product_variants (id, product_id, name, type, price_delta, stock)
+        VALUES (?, ?, ?, ?, ?, ?)
+      `);
 
-    const insertRevStmt = db.prepare(`
-      INSERT INTO product_reviews (id, product_id, user_name, rating, comment, created_at)
-      VALUES (?, ?, ?, ?, ?, ?)
-    `);
+      const insertRevStmt = db.prepare(`
+        INSERT OR REPLACE INTO product_reviews (id, product_id, user_name, rating, comment, created_at)
+        VALUES (?, ?, ?, ?, ?, ?)
+      `);
 
-    for (const prod of seedProducts) {
-      insertProdStmt.run(
-        prod.id,
-        prod.name,
-        prod.slug,
-        prod.description,
-        prod.price,
-        prod.original_price,
-        prod.discount_percent,
-        prod.stock,
-        prod.category_id,
-        prod.merchant_id,
-        prod.merchant_name,
-        prod.merchant_badge,
-        prod.city,
-        prod.rating,
-        prod.sold_count
-      );
+      for (const prod of seedProducts) {
+        insertProdStmt.run(
+          prod.id,
+          prod.name,
+          prod.slug,
+          prod.description,
+          prod.price,
+          prod.original_price,
+          prod.discount_percent,
+          prod.stock,
+          prod.category_id,
+          prod.merchant_id,
+          prod.merchant_name,
+          prod.merchant_badge,
+          prod.city,
+          prod.rating,
+          prod.sold_count
+        );
 
-      if (prod.images && prod.images.length > 0) {
-        for (const img of prod.images) {
-          insertImgStmt.run(img.id, prod.id, img.image_url, img.is_primary ? 1 : 0);
+        if (prod.images && prod.images.length > 0) {
+          for (const img of prod.images) {
+            insertImgStmt.run(img.id, prod.id, img.image_url, img.is_primary ? 1 : 0);
+          }
         }
-      }
 
-      if (prod.variants && prod.variants.length > 0) {
-        for (const v of prod.variants) {
-          insertVarStmt.run(v.id, prod.id, v.name, v.type, v.price_delta || 0, v.stock || 0);
+        if (prod.variants && prod.variants.length > 0) {
+          for (const v of prod.variants) {
+            insertVarStmt.run(v.id, prod.id, v.name, v.type, v.price_delta || 0, v.stock || 0);
+          }
         }
-      }
 
-      if (prod.reviews && prod.reviews.length > 0) {
-        for (const r of prod.reviews) {
-          insertRevStmt.run(r.id, prod.id, r.user_name, r.rating, r.comment, r.created_at || new Date().toISOString());
+        if (prod.reviews && prod.reviews.length > 0) {
+          for (const r of prod.reviews) {
+            insertRevStmt.run(r.id, prod.id, r.user_name, r.rating, r.comment, r.created_at || new Date().toISOString());
+          }
         }
       }
     }
