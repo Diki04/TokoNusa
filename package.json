@@ -1,0 +1,25 @@
+{
+  "name": "tokonusa-ecommerce",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "seed": "node scripts/seedAll.js",
+    "benchmark": "node scripts/benchmark.js",
+    "dev:gateway": "node services/api-gateway/src/index.js",
+    "dev:auth": "node services/auth-service/src/index.js",
+    "dev:catalog": "node services/catalog-service/src/index.js",
+    "dev:cart": "node services/cart-service/src/index.js",
+    "dev:order": "node services/order-service/src/index.js",
+    "dev:services": "concurrently -n \"GATEWAY,AUTH,CATALOG,CART,ORDER\" -c \"cyan,blue,green,yellow,magenta\" \"pnpm run dev:gateway\" \"pnpm run dev:auth\" \"pnpm run dev:catalog\" \"pnpm run dev:cart\" \"pnpm run dev:order\"",
+    "dev:web": "pnpm --filter @tokonusa/web run dev",
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"cyan,green\" \"pnpm run dev:services\" \"pnpm run dev:web\""
+  },
+  "devDependencies": {
+    "@tokonusa/common": "workspace:*",
+    "concurrently": "^9.1.2",
+    "supertest": "^7.3.1",
+    "vitest": "^3.0.7"
+  }
+}
