@@ -333,10 +333,13 @@ export default function OrderHistoryPage({ onNavigate, newOrderId }) {
                 {/* Primary Item Preview */}
                 <div className="flex items-start gap-4">
                   <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-slate-100 border border-slate-200 overflow-hidden shrink-0">
-                    {firstItem.imageUrl ? (
+                    {firstItem.imageUrl || firstItem.image_url || firstItem.primary_image ? (
                       <img
-                        src={firstItem.imageUrl}
+                        src={firstItem.imageUrl || firstItem.image_url || firstItem.primary_image}
                         alt={firstItem.productName}
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
                         className="w-full h-full object-cover"
                       />
                     ) : (

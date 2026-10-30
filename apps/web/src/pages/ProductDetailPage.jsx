@@ -184,9 +184,21 @@ export default function ProductDetailPage({
   };
 
   const handleBuyNow = async () => {
-    await handleAddToCart();
+    const directItem = {
+      id: `direct-${id}-${selectedVariant?.id || 'default'}`,
+      productId: id,
+      name,
+      price: currentPrice,
+      original_price,
+      quantity,
+      selectedVariant,
+      variantName: selectedVariant?.name || '',
+      merchantName: merchant_name,
+      merchantCity: city,
+      imageUrl: product.primary_image || product.imageUrl || images?.[0]?.image_url || '',
+    };
     if (onNavigate) {
-      onNavigate('cart');
+      onNavigate('checkout', { items: [directItem] });
     }
   };
 

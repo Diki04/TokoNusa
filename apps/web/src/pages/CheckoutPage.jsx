@@ -411,10 +411,13 @@ export default function CheckoutPage({ items: initialItems, onNavigate }) {
                     <div key={item.id} className="flex items-center justify-between pt-2 first:pt-0">
                       <div className="flex items-center gap-3">
                         <div className="w-14 h-14 rounded-lg bg-slate-100 border border-slate-200 overflow-hidden shrink-0">
-                          {item.imageUrl ? (
+                          {item.imageUrl || item.image_url || item.primary_image ? (
                             <img
-                              src={item.imageUrl}
-                              alt={item.productName || item.name}
+                              src={item.imageUrl || item.image_url || item.primary_image}
+                              alt=""
+                              onError={(e) => {
+                                e.currentTarget.src = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=400&q=80';
+                              }}
                               className="w-full h-full object-cover"
                             />
                           ) : (
