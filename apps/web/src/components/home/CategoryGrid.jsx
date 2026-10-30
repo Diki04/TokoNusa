@@ -83,22 +83,23 @@ export const DEFAULT_CATEGORIES = [
 function CategoryCard({ cat, isSelected, onSelectCategory }) {
   const [imageError, setImageError] = useState(false);
   const IconComponent = ICON_MAP[cat.icon] || Package;
-  const showImage = Boolean(cat.image_url) && !imageError;
+  const imageUrl = cat.image_url || cat.imageUrl;
+  const showImage = Boolean(imageUrl) && !imageError;
 
   return (
     <button
       type="button"
       onClick={() => onSelectCategory && onSelectCategory(cat.id === 'all' ? '' : cat.id)}
-      className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border transition-all duration-200 text-center group cursor-pointer ${
+      className={`flex flex-col items-center justify-center p-3 sm:p-4 rounded-2xl border transition-all duration-200 text-center group cursor-pointer ${
         isSelected
-          ? 'border-[#03AC0E] bg-emerald-50/60 shadow-sm ring-2 ring-emerald-500/20'
-          : 'border-slate-200 bg-white hover:border-emerald-300 hover:shadow-sm'
+          ? 'border-[#03AC0E] bg-emerald-50/70 shadow-sm ring-2 ring-emerald-500/20'
+          : 'border-slate-200/90 bg-white hover:border-emerald-300 hover:shadow-md'
       }`}
     >
       <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden mb-2.5 flex items-center justify-center bg-slate-50 border border-slate-100 group-hover:scale-105 group-hover:border-emerald-200 transition-all duration-200 relative shrink-0">
         {showImage ? (
           <img
-            src={cat.image_url}
+            src={imageUrl}
             alt=""
             onError={() => setImageError(true)}
             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"

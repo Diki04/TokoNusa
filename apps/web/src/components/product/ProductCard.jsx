@@ -2,10 +2,32 @@ import React from 'react';
 import { Star, MapPin, ShieldCheck, Truck, ShoppingCart } from 'lucide-react';
 import { formatRupiah, formatCompactCount } from '../../utils/formatters.js';
 
+const PRODUCT_EXACT_FALLBACKS = {
+  'prod-iphone-16-pro-max': 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80',
+  'prod-samsung-s24-ultra': 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80',
+  'prod-kopi-gayo-specialty': 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80',
+  'prod-batik-keris-parang': 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80',
+  'prod-sony-wh1000xm5': 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+  'prod-ventela-public-low': 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80',
+  'prod-indomie-goreng-karton': 'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=80',
+  'prod-helm-njs-kairoz': 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80',
+  'prod-minyak-kayu-putih-cap-lang': 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80',
+};
+
+const CATEGORY_FALLBACK_IMAGES = {
+  'cat-gadget': 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80',
+  'cat-elektronik': 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+  'cat-fashion-pria': 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80',
+  'cat-kuliner': 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80',
+  'cat-otomotif': 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80',
+  'cat-rumah-tangga': 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80',
+};
+
 export default function ProductCard({ product, onClick, onAddToCart }) {
   if (!product) return null;
 
   const {
+    id,
     name,
     price = 0,
     original_price,
@@ -17,7 +39,13 @@ export default function ProductCard({ product, onClick, onAddToCart }) {
     sold_count = 0,
     images = [],
     imageUrl,
+    category_id,
   } = product;
+
+  const resolvedFallback =
+    PRODUCT_EXACT_FALLBACKS[id] ||
+    CATEGORY_FALLBACK_IMAGES[category_id] ||
+    'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=800&q=80';
 
   const displayImage =
     product.primary_image ||
@@ -28,7 +56,7 @@ export default function ProductCard({ product, onClick, onAddToCart }) {
     images?.[0]?.image_url ||
     images?.[0]?.imageUrl ||
     (typeof images?.[0] === 'string' ? images[0] : '') ||
-    'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80';
+    resolvedFallback;
 
   const hasDiscount = discount_percent > 0 && original_price && original_price > price;
 
@@ -59,6 +87,11 @@ export default function ProductCard({ product, onClick, onAddToCart }) {
             src={displayImage}
             alt={name}
             loading="lazy"
+            onError={(e) => {
+              if (e.currentTarget.src !== resolvedFallback) {
+                e.currentTarget.src = resolvedFallback;
+              }
+            }}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />
 
@@ -69,7 +102,7 @@ export default function ProductCard({ product, onClick, onAddToCart }) {
               onClick={handleAddToCartClick}
               aria-label="Tambah ke Keranjang"
               title="Tambah ke Keranjang"
-              className="absolute right-2.5 bottom-2.5 w-9 h-9 rounded-full bg-white/95 hover:bg-[#03AC0E] text-slate-700 hover:text-white shadow-md flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0"
+              className="absolute right-2.5 bottom-2.5 w-9 h-9 rounded-full bg-white/95 hover:bg-[#03AC0E] text-slate-700 hover:text-white shadow-md flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 active:scale-95 cursor-pointer"
             >
               <ShoppingCart className="w-4 h-4" />
             </button>

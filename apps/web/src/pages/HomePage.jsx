@@ -14,6 +14,10 @@ import {
   SlidersHorizontal,
   PackageSearch,
   CheckCircle2,
+  Truck,
+  ShieldCheck,
+  Zap,
+  Lock,
 } from 'lucide-react';
 
 const FALLBACK_CATEGORIES = [
@@ -294,6 +298,36 @@ const FALLBACK_PRODUCTS = [
     ],
   },
   {
+    id: 'prod-indomie-goreng-karton',
+    name: 'Indomie Mi Goreng Spesial 1 Karton (40 Pcs) Hemat Jumbo',
+    slug: 'indomie-mi-goreng-spesial-1-karton-40-pcs-hemat-jumbo',
+    description:
+      'Mi instan legendaris Indonesia dengan cita rasa bumbu gurih khas, minyak bawang wangi, kecap manis, dan bawang goreng renyah. Paket praktis 1 karton isi 40 bungkus untuk stok keluarga.',
+    price: 118000,
+    original_price: 130000,
+    discount_percent: 9,
+    stock: 500,
+    category_id: 'cat-kuliner',
+    category_name: 'Makanan & Minuman Lokal',
+    merchant_id: 'merchant-sembako-jaya',
+    merchant_name: 'Sembako Jaya Nusantara',
+    merchant_badge: 'Power Merchant Pro',
+    city: 'Surabaya',
+    rating: 4.9,
+    sold_count: 24800,
+    imageUrl: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=80',
+    primary_image: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=80',
+    images: [
+      { id: 'img-indomie-1', image_url: 'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=80', is_primary: 1 },
+    ],
+    variants: [
+      { id: 'var-indomie-karton', name: '1 Karton (40 Bungkus)', type: 'KEMASAN', price_delta: 0, stock: 500 },
+    ],
+    reviews: [
+      { id: 'rev-indomie-1', user_name: 'Hendrik Pratama', rating: 5, comment: 'Penyelamat anak kos dan keluarga! Expire date masih lama 1 tahun ke depan. Packing aman pake kardus bawaan.', created_at: '2026-10-24 16:20:00' },
+    ],
+  },
+  {
     id: 'prod-minyak-kayu-putih-cap-lang',
     name: 'Minyak Kayu Putih Cap Lang 210 ml Hangat Alami Original',
     slug: 'minyak-kayu-putih-cap-lang-210-ml-hangat-alami-original',
@@ -514,6 +548,49 @@ export default function HomePage({
           }
         }}
       />
+
+      {/* TokoNusa Value Highlights */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 -mt-3 mb-2">
+        <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 sm:p-4 shadow-xs flex items-center gap-3 group hover:border-emerald-300 transition-all">
+          <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#03AC0E] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <Truck className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 className="text-xs sm:text-sm font-bold text-slate-800">Bebas Ongkir</h4>
+            <p className="text-[11px] text-slate-400">Ke seluruh pelosok Nusantara</p>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 sm:p-4 shadow-xs flex items-center gap-3 group hover:border-emerald-300 transition-all">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <ShieldCheck className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 className="text-xs sm:text-sm font-bold text-slate-800">100% Original</h4>
+            <p className="text-[11px] text-slate-400">Jaminan uang kembali jika palsu</p>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 sm:p-4 shadow-xs flex items-center gap-3 group hover:border-emerald-300 transition-all">
+          <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <Zap className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 className="text-xs sm:text-sm font-bold text-slate-800">Kirim 2 Jam Tiba</h4>
+            <p className="text-[11px] text-slate-400">Pengiriman instant & sameday</p>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl border border-slate-200/80 p-3.5 sm:p-4 shadow-xs flex items-center gap-3 group hover:border-emerald-300 transition-all">
+          <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+            <Lock className="w-5 h-5" />
+          </div>
+          <div>
+            <h4 className="text-xs sm:text-sm font-bold text-slate-800">Pembayaran Aman</h4>
+            <p className="text-[11px] text-slate-400">QRIS, VA & proteksi transaksi</p>
+          </div>
+        </div>
+      </div>
 
       {/* 2. Category Quick Filter Grid */}
       <CategoryGrid

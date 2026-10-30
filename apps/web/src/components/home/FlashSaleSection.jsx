@@ -53,6 +53,27 @@ export function calculateStockPercentage(sold, totalStock) {
   return Math.min(100, Math.max(0, pct));
 }
 
+const PRODUCT_EXACT_FALLBACKS = {
+  'prod-iphone-16-pro-max': 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80',
+  'prod-samsung-s24-ultra': 'https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=800&q=80',
+  'prod-kopi-gayo-specialty': 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80',
+  'prod-batik-keris-parang': 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80',
+  'prod-sony-wh1000xm5': 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+  'prod-ventela-public-low': 'https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=80',
+  'prod-indomie-goreng-karton': 'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=80',
+  'prod-helm-njs-kairoz': 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80',
+  'prod-minyak-kayu-putih-cap-lang': 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80',
+};
+
+const CATEGORY_FALLBACK_IMAGES = {
+  'cat-gadget': 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=800&q=80',
+  'cat-elektronik': 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+  'cat-fashion-pria': 'https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=800&q=80',
+  'cat-kuliner': 'https://images.unsplash.com/photo-1587734195503-904fca47e0e9?auto=format&fit=crop&w=800&q=80',
+  'cat-otomotif': 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80',
+  'cat-rumah-tangga': 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=800&q=80',
+};
+
 const DEFAULT_FLASH_PRODUCTS = [
   {
     id: 'prod-sony-wh1000xm5',
@@ -197,6 +218,11 @@ export default function FlashSaleSection({
           const totalStock = (item.stock || 0) + (item.sold_count || 0);
           const percentageClaimed = calculateStockPercentage(item.sold_count || 0, totalStock);
 
+          const resolvedFallback =
+            PRODUCT_EXACT_FALLBACKS[item.id] ||
+            CATEGORY_FALLBACK_IMAGES[item.category_id] ||
+            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80';
+
           const imageSrc =
             item.primary_image ||
             item.primaryImage ||
@@ -205,7 +231,7 @@ export default function FlashSaleSection({
             item.images?.[0]?.image_url ||
             item.images?.[0]?.imageUrl ||
             (typeof item.images?.[0] === 'string' ? item.images[0] : '') ||
-            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80';
+            resolvedFallback;
 
           return (
             <div
@@ -219,6 +245,11 @@ export default function FlashSaleSection({
                   src={imageSrc}
                   alt={item.name}
                   loading="lazy"
+                  onError={(e) => {
+                    if (e.currentTarget.src !== resolvedFallback) {
+                      e.currentTarget.src = resolvedFallback;
+                    }
+                  }}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 {discount > 0 && (
