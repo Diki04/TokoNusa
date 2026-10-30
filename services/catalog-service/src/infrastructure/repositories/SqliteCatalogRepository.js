@@ -155,8 +155,14 @@ export class SqliteCatalogRepository extends ICatalogRepository {
       .prepare('SELECT * FROM product_reviews WHERE product_id = ? ORDER BY created_at DESC')
       .all(row.id);
 
+    const primaryImg = images.find((i) => i.is_primary)?.image_url || images[0]?.image_url || '';
+
     return {
       ...row,
+      imageUrl: primaryImg,
+      image_url: primaryImg,
+      primaryImage: primaryImg,
+      primary_image: primaryImg,
       originalPrice: row.original_price,
       discountPercent: row.discount_percent,
       categoryId: row.category_id,
